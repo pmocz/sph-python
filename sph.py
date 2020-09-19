@@ -134,23 +134,19 @@ def getAcc( pos, vel, m, h, k, n, lmbda, nu ):
 	dx, dy, dz = getPairwiseSeparations( pos, pos )
 	dWx, dWy, dWz = gradW( dx, dy, dz, h )
 	
-	# Add P0*ressure contribution to accelerations
+	# Add Pressure contribution to accelerations
 	ax = - np.sum( m * ( P/rho**2 + P.T/rho.T**2  ) * dWx, 1).reshape((N,1))
 	ay = - np.sum( m * ( P/rho**2 + P.T/rho.T**2  ) * dWy, 1).reshape((N,1))
 	az = - np.sum( m * ( P/rho**2 + P.T/rho.T**2  ) * dWz, 1).reshape((N,1))
 	
-	# Add external potential force
-	ax += -lmbda * pos[:,0].reshape((N,1))
-	ay += -lmbda * pos[:,1].reshape((N,1))
-	az += -lmbda * pos[:,2].reshape((N,1))
-	
-	# Add viscosity
-	ax += -nu * vel[:,0].reshape((N,1))
-	ay += -nu * vel[:,1].reshape((N,1))
-	az += -nu * vel[:,2].reshape((N,1))
-	
 	# pack together the acceleration components
 	a = np.hstack((ax,ay,az))
+	
+	# Add external potential force
+	a -= lmbda * pos
+	
+	# Add viscosity
+	a -= nu * vel
 	
 	return a
 	
