@@ -209,7 +209,7 @@ def main():
 		# update time
 		t += dt
 		
-		# get density for plottiny
+		# get density for plotting
 		rho = getDensity( pos, pos, m, h )
 		
 		# plot in real time
