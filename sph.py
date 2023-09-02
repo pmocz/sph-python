@@ -82,7 +82,7 @@ def getDensity( r, pos, m, h ):
 	pos   is an N x 3 matrix of SPH particle positions
 	m     is the particle mass
 	h     is the smoothing length
-	rho   is M x 1 vector of accelerations
+	rho   is M x 1 vector of densities
 	"""
 	
 	M = r.shape[0]
