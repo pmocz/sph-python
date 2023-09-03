@@ -153,7 +153,7 @@ def getAcc( pos, vel, m, h, k, n, lmbda, nu ):
 
 
 def main():
-	""" N-body simulation """
+	""" SPH simulation """
 	
 	# Simulation parameters
 	N         = 400    # Number of particles
